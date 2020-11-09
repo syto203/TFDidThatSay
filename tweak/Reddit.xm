@@ -2,6 +2,10 @@
 #import "Reddit.h"
 #import "assets/TFHelper.h"
 
+//added tweak icon in app bundle
+NSBundle* const tfdidthatsaybundle = [NSBundle bundleWithPath: [[NSBundle mainBundle] pathForResource: @"TFDidThatSay" ofType: @"bundle"]];
+NSString *imagePath = [tfdidthatsaybundle pathForResource:@"eye160dark" ofType:@"png"];
+
 static BOOL isEnabled;
 static BOOL isRedditEnabled;
 static BOOL isTFDeletedOnly;
@@ -55,7 +59,10 @@ int secondVersionPart = 0;
 
 	if ([%c(TFHelper) shouldShowUndeleteButtonWithInfo:author isDeletedOnly:isTFDeletedOnly]) {
 
-		UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
+		//added tweak icon in app bundle
+		UIImage* origImage = [UIImage imageWithContentsOfFile:imagePath];
+
+		// UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
 
 		CGSize existingImageSize = [[arg1[0] leftIconImage] size];
 		CGFloat scale = origImage.size.width / existingImageSize.width;
@@ -221,7 +228,10 @@ int secondVersionPart = 0;
 	if ([post isSelfPost]) {
 		if ([%c(TFHelper) shouldShowUndeleteButtonWithInfo:author isDeletedOnly:isTFDeletedOnly]) {
 
-			UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
+		//added tweak icon in app bundle
+		UIImage* origImage = [UIImage imageWithContentsOfFile:imagePath];
+
+			// UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
 
 			CGSize existingImageSize = [[arg1[0] leftIconImage] size];
 			CGFloat scale = origImage.size.width / existingImageSize.width;
@@ -389,8 +399,10 @@ int secondVersionPart = 0;
 	NSString *author = [[self comment] author];
 
 	if ([%c(TFHelper) shouldShowUndeleteButtonWithInfo:author isDeletedOnly:isTFDeletedOnly]) {
+		//added tweak icon in app bundle
+		UIImage* origImage = [UIImage imageWithContentsOfFile:imagePath];
 
-		UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
+		// UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
 
 		CGSize existingImageSize = [[arg1[0] leftIconImage] size];
 		CGFloat scale = origImage.size.width / existingImageSize.width;
@@ -474,8 +486,10 @@ int secondVersionPart = 0;
 
 	if ([post isSelfPost]) {
 		if ([%c(TFHelper) shouldShowUndeleteButtonWithInfo:author isDeletedOnly:isTFDeletedOnly]) {
+		//added tweak icon in app bundle
+		UIImage* origImage = [UIImage imageWithContentsOfFile:imagePath];
 
-			UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
+			// UIImage* origImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
 
 			CGSize existingImageSize = [[arg1[0] leftIconImage] size];
 			CGFloat scale = origImage.size.width / existingImageSize.width;
@@ -617,7 +631,10 @@ int secondVersionPart = 0;
 	UIButton *undeleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[undeleteButton addTarget:self action:@selector(buttonAction) forControlEvents:UIControlEventTouchUpInside];
 
-	UIImage* undeleteImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
+	//added tweak icon in app bundle
+		UIImage* undeleteImage = [UIImage imageWithContentsOfFile:imagePath];
+
+	// UIImage* undeleteImage = [UIImage imageWithContentsOfFile:@"/var/mobile/Library/Application Support/TFDidThatSay/eye160dark.png"];
 
 	[undeleteButton setImage:undeleteImage forState:UIControlStateNormal];
 
@@ -657,7 +674,7 @@ static void loadPrefs(){
 	} else {
 		isEnabled = YES;
 		isRedditEnabled = YES;
-		isTFDeletedOnly = YES;
+		isTFDeletedOnly = NO; //always on
 		pushshiftRequestTimeoutValue = 10;
 	}
 }

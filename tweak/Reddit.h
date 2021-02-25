@@ -1,4 +1,7 @@
-/* ---- Reddit v3 & v4 ---- */
+
+#import <UIKit/UIKit.h>
+
+/* ---- Reddit v3 & v4 & v2020 & v2021 ---- */
 
 /* -- Comment Interfaces -- */
 
@@ -35,8 +38,12 @@
 @end
 
 
-/* ---- Reddit v4 ---- */
+/* ---- Reddit v4+ ---- */
 
+
+@interface ASDisplayNode
+- (id)supernode;
+@end
 
 /* -- Comment Interfaces -- */
 
@@ -52,9 +59,10 @@
 @property(strong, nonatomic) id commentNode;
 @end
 
-@interface CommentTreeHeaderNode
+@interface CommentTreeHeaderNode : ASDisplayNode
 @property(strong, nonatomic) id commentTreeNode;
 - (void)updateContentViewsForData:(id)arg1;
+- (void)configureNodes;
 @end
 
 @interface CommentTreeCommandBarNode
@@ -67,8 +75,15 @@
 
 @interface CommentTreeHeaderView
 @property(strong, nonatomic) id commentTreeNode;
-
 - (void)updateContentViewsForData:(id)arg1;
+@end
+
+@interface CommentTreeTextNode
+- (void)configureTextNode;
+@end
+
+@interface CommentTreeContentNode
+@property(strong, nonatomic) CommentTreeTextNode *textNode;
 @end
 
 /* -- Post Interfaces -- */
@@ -110,6 +125,7 @@
 @end
 
 @interface FeedPostTitleNode
+@property(strong, nonatomic) Post *post;
 @property(strong, nonatomic) id delegate;
 - (void)configureNodes;
 @end
@@ -125,7 +141,8 @@
 /* -- Other Interfaces -- */
 
 @interface RichTextDisplayNode
-@property(strong, nonatomic) id attributedText;
+@property(strong, nonatomic) NSAttributedString *attributedText;
+- (void)configureDisplayNodes;
 @end
 
 @interface RUIActionSheetItem : NSObject
@@ -151,7 +168,7 @@
 - (id)initWithConfig:(id)arg1;
 @end
 
-@interface ThemeManager
+@interface ThemeManager : NSObject
 
 + (id)sharedManager;
 
